@@ -55,6 +55,7 @@ string make_query(const string &name, uint16_t qtype)
 
 	uint16_t qclass = htons(1);
 
+// https://www.rfc-editor.org/rfc/rfc1035#section-4.1.1
 	dnshdr qhdr;
 	qhdr.q_count = htons(1);
 	qhdr.qr = 0;
@@ -66,6 +67,7 @@ string make_query(const string &name, uint16_t qtype)
 		return b64query;
 
 	dns_query = string(reinterpret_cast<char *>(&qhdr), sizeof(qhdr));
+	//https://www.rfc-editor.org/rfc/rfc1035#section-4.1.2
 	dns_query += qname;
 	dns_query += string(reinterpret_cast<char *>(&qtype), sizeof(uint16_t));
 	dns_query += string(reinterpret_cast<char *>(&qclass), sizeof(uint16_t));
@@ -121,9 +123,11 @@ int dnshttps::get(const string &name, uint16_t qtype, dns_reply &result, string 
 			req += b64;
 		} else {
 			req += name;
-
+			// qtype值 https://www.rfc-editor.org/rfc/rfc1035#section-3.2.3
+			// https://www.rfc-editor.org/rfc/rfc1035#section-3.2.2
 			if (qtype == htons(dns_type::A))
 				req += "&type=A";
+			//ip6扩展 https://www.rfc-editor.org/rfc/rfc3596
 			else if (qtype == htons(dns_type::AAAA))
 				req += "&type=AAAA";
 			else if (qtype == htons(dns_type::NS))

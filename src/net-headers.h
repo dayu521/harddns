@@ -21,8 +21,8 @@
  * open-sourced include files
  */
 
-#ifndef harddns_net_headers_h
-#define harddns_net_headers_h
+#ifndef SRC_NET_HEADERS
+#define SRC_NET_HEADERS
 
 #include <sys/types.h>
 #ifdef __linux__
@@ -132,5 +132,5 @@ enum dns_type : uint16_t {
 
 } // namespace
 
-#endif
+#endif /* SRC_NET_HEADERS */
 
