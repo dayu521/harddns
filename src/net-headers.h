@@ -46,7 +46,7 @@ namespace harddns {
 
 namespace net_headers {
 
-
+//https://www.rfc-editor.org/rfc/rfc1035#section-4.1.1
 class dnshdr {
 public:
 	uint16_t id;
